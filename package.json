@@ -2,7 +2,7 @@
     "name": "mimetree",
     "version": "1.0.0",
     "description": "Parse and compile mime trees",
-    "main": "lib/mimetree.js",
+    "main": "lib/mime-tree.js",
     "dependencies": {
         "libmime": "5.1.0"
     },
