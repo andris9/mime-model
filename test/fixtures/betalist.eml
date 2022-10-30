@@ -1,0 +1,600 @@
+Delivered-To: andris.reinman@gmail.com
+Received: by 2002:a05:6358:11cd:b0:d6:9b46:96a with SMTP id i13csp2033813rwl;
+        Sat, 29 Oct 2022 09:03:30 -0700 (PDT)
+X-Received: by 2002:a05:6a00:e0b:b0:56c:8c13:2a54 with SMTP id bq11-20020a056a000e0b00b0056c8c132a54mr5218009pfb.17.1667059410474;
+        Sat, 29 Oct 2022 09:03:30 -0700 (PDT)
+ARC-Seal: i=2; a=rsa-sha256; t=1667059410; cv=pass;
+        d=google.com; s=arc-20160816;
+        b=zfuD7zhmqhndn89asv47pYM1QNgCKof3pVTuv075snuTWMm7EtYWO7rhWeGlAnf/Dr
+         EDIPCaaRm6FRlXsKEsRF5UV1oeVcdiG0LKdyQMGuw8N9+UIw6InPzTONcgKDgx9APtN5
+         G6JwnvvjhAFYLu8jnO5S/KB862rNw5dnGtdqA/oMjz7LwC0JHozxoB4BYd8rOKNcPChm
+         52ESDsG8eKgDUiIN5PTXmJ7XXYmiHP8BtK2KFDq+xN8Kb406TECbh4MjZU2RBvECE8BL
+         I5blzapTB+lAtJAQeTg+SfmNKNp5VJY6SAnZbQ4TPcaIxVzLozmCNGCOMQMj8LMgHmzD
+         fTBg==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:mime-version:from:date:dkim-signature
+         :delivered-to;
+        bh=7CbQLEuVoArqT/XuLj82ldwnHzOG+MkVA6wzE62NGfw=;
+        b=WRe2/a21hM0P6H85rVcXnyKQbLNtifQRbC43I4BjHT/NK/MmY3WUo+zyjoiPSPvRT0
+         GCOHmxuoSeByt+BDR+C4S/XBOMHU8Sw9EunIFTVg+MDdmWJ9pM+h+HiQ5Ei4iVA92fup
+         XnIXpj9XlSckRf5JkFGZw7IPcgpZSIz0FCoq4Quzrl+ousAqxZiKLBMGBCnpnBFBCFUN
+         /m51ub+1IB63jQaytwl8zmRKE1Qrnbw00P/DBs5+pEEGQZTADNH3oTgudklMYnb1bean
+         r2+50s0HMthutmlpMNq0o0/qHW11ES0Z7iw8+qutRswb4WbIyOS54LZApM22UASyaLdj
+         RMcA==
+ARC-Authentication-Results: i=2; mx.google.com;
+       dkim=pass header.i=@betalist.com header.s=s1 header.b=ZRawgYgq;
+       arc=pass (i=1 spf=pass spfdomain=em4812.betalist.com dkim=pass dkdomain=betalist.com dmarc=pass fromdomain=betalist.com);
+       spf=pass (google.com: domain of andris+caf_=andris.reinman=gmail.com@postalsys.com designates 209.85.220.41 as permitted sender) smtp.mailfrom="andris+caf_=andris.reinman=gmail.com@postalsys.com";
+       dmarc=pass (p=REJECT sp=NONE dis=NONE) header.from=betalist.com
+Return-Path: <andris+caf_=andris.reinman=gmail.com@postalsys.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id h2-20020a17090acf0200b00212f098ef9bsor510981pju.22.2022.10.29.09.03.30
+        for <andris.reinman@gmail.com>
+        (Google Transport Security);
+        Sat, 29 Oct 2022 09:03:30 -0700 (PDT)
+Received-SPF: pass (google.com: domain of andris+caf_=andris.reinman=gmail.com@postalsys.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@betalist.com header.s=s1 header.b=ZRawgYgq;
+       arc=pass (i=1 spf=pass spfdomain=em4812.betalist.com dkim=pass dkdomain=betalist.com dmarc=pass fromdomain=betalist.com);
+       spf=pass (google.com: domain of andris+caf_=andris.reinman=gmail.com@postalsys.com designates 209.85.220.41 as permitted sender) smtp.mailfrom="andris+caf_=andris.reinman=gmail.com@postalsys.com";
+       dmarc=pass (p=REJECT sp=NONE dis=NONE) header.from=betalist.com
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=to:subject:message-id:mime-version:from:date:dkim-signature
+         :delivered-to:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=7CbQLEuVoArqT/XuLj82ldwnHzOG+MkVA6wzE62NGfw=;
+        b=QXX4P1HaEXpu0OsnWLtcaGULRwcJItNY/XdRHv6ZSoN5I0s9PfMGtBh2z/ZJI+ylMw
+         8p4mdlJibZhurHuN10yKC4GkKTrU7NQEhTXPnaSBdyxagxL/xhVsUSRUeUoiwPzFQ5RX
+         U2YnbCfH8SSwhiPpxTwQY9CDN7wd1OAyrCaXE1r/UOIZ04JnsuM3GaLl+P6pC8GozRWe
+         JxWE+5w/mNwVHdbPA7k7XJ4fZPI3AjtPzRUzIgAQPMtdUUIuyhXZ6uzhTJ3oRfZgdIHK
+         klkS/3JxHIqL/czIQq1IcJo1rsxlt19C9A2Gq+dph0nitSxzu7gzBCg3ldergD1kjEZ5
+         jXuQ==
+X-Gm-Message-State: ACrzQf3QoR3gY9cbJCkXgcxNCpJBJK5UyunFZG6wpw0uJTz0pkh/dG0y
+	OxgMvC6xKSweIeiasSy1D3442LligkG2e6KwcGHeRKo3JRfKxxK2aJQfjq8=
+X-Received: by 2002:a17:90b:4a48:b0:213:43bc:91ab with SMTP id lb8-20020a17090b4a4800b0021343bc91abmr5255125pjb.86.1667059409985;
+        Sat, 29 Oct 2022 09:03:29 -0700 (PDT)
+X-Forwarded-To: andris.reinman@gmail.com
+X-Forwarded-For: andris@postalsys.com andris.reinman@gmail.com
+Delivered-To: andris@kreata.ee
+Received: by 2002:a17:90b:1801:0:0:0:0 with SMTP id lw1csp793520pjb;
+        Sat, 29 Oct 2022 09:03:28 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM7HcX6H68IH9v0FhJqA6hsbR1kzqXVNRATz3zN5fpEONoOTRo5PKzXzvzbCdBAq7gnJzDz9
+X-Received: by 2002:a37:c4d:0:b0:6fa:b44:1610 with SMTP id 74-20020a370c4d000000b006fa0b441610mr3428134qkm.153.1667059408076;
+        Sat, 29 Oct 2022 09:03:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1667059408; cv=none;
+        d=google.com; s=arc-20160816;
+        b=UMFvN67bXssor44wKx1PEtBeFWKjSbg0RJ0/X8FXmn0sny6c/Nd+AqDga/eFSAU9XG
+         torMgrBwrQUCDGP7MfwIRz8wLiK3BBLAnrmF24heibqvedT6cAJDURv5vyP6YXCztG0b
+         xc101iLxc7zCrkBaZPhtj+oBLzifbFpuWjTHY1X9TuqI2V3B5TOwiuPQgp1cMNPoGvC6
+         PVNXcBzwV+3YAzWxBGMYowDOxq7vcnzXIoKihkBMy6vDDHirvb+9KWF5NzgRCuMHuZWN
+         1ME/qnAtPoY4/5pkhgeXjfCL2ShJQnaeg66oh8ywsSE73TDdFCS/NCbHH1z5qyP75Bu7
+         lIhw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:mime-version:from:date:dkim-signature;
+        bh=7CbQLEuVoArqT/XuLj82ldwnHzOG+MkVA6wzE62NGfw=;
+        b=CfjQoUSfn4bBS9hBCtX6OXYf4/ZfjAXBQK7mVG/d12gE8PEdUnw6TgK5jcXCobSbBt
+         nfIT9dsNdZlkK+OXDF8BMamHmg0B5flfz/3djT5+O+BsDGX+Biuu5+FLCsiWFH5C2+bL
+         /8deN4q/bTa8Iji8NnOodnAMKkM1AdeUcCDlT5xaASXyGTij2GRbLqXsJK8+tL6ZuBvI
+         LqlYFrRgs4y5WZUCZ/cTn+/OXITEqp6Th1GwsEO5Wk9G3rEAPaKIKTI05/p9yRMJ+dkr
+         l19cA87olAs9jw63iwlCTJ5A7na1Ab9JYV1S5iTl/THkjq51dSse6qd1QeWUO+WzoBQt
+         YmEA==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@betalist.com header.s=s1 header.b=ZRawgYgq;
+       spf=pass (google.com: domain of bounces+6871073-4342-andris=kreata.ee@em4812.betalist.com designates 168.245.38.142 as permitted sender) smtp.mailfrom="bounces+6871073-4342-andris=kreata.ee@em4812.betalist.com";
+       dmarc=pass (p=REJECT sp=NONE dis=NONE) header.from=betalist.com
+Return-Path: <bounces+6871073-4342-andris=kreata.ee@em4812.betalist.com>
+Received: from o1.ptr4739.betalist.com (o1.ptr4739.betalist.com. [168.245.38.142])
+        by mx.google.com with ESMTPS id fw8-20020a056214238800b004b1c8f75ec7si1019205qvb.243.2022.10.29.09.03.27
+        for <andris@kreata.ee>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 29 Oct 2022 09:03:28 -0700 (PDT)
+Received-SPF: pass (google.com: domain of bounces+6871073-4342-andris=kreata.ee@em4812.betalist.com designates 168.245.38.142 as permitted sender) client-ip=168.245.38.142;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=betalist.com;
+	h=content-type:from:mime-version:subject:to:cc;
+	s=s1; bh=7CbQLEuVoArqT/XuLj82ldwnHzOG+MkVA6wzE62NGfw=;
+	b=ZRawgYgqulO2dXM08WWKXfU6BBa5pKxw1TpwsLc5ozmKFraMHcQ+KlXmN/uYAIRfZgHF
+	FM+suvniOybugSPuXxa/WgbPYdvEXQqSftCtjMm5veS/vDlGgeIpKd6Xy2foyroEow/V1M
+	zoIfrTPTHW0eB1C1yNg3NiO+K11QTdmJ9Pbb6An4nPqq2KzDF/d417ebO5ulP2XjuWdFUD
+	iVttoccZ7CPli+9J9nSVSHixN0lav9G5fxm9J8znD6qNB2QWYQwG7rX1bQzsk3/i7FkMxd
+	RtLwDUBlYFY4I3dqWsCL31x/uR1Tgw5v5i6KYCIXvtPGxmEydGIrqG2wfdTxYYZA==
+Received: by filterdrecv-59d9bdc65f-gnfsp with SMTP id filterdrecv-59d9bdc65f-gnfsp-1-635D4EC9-5F
+        2022-10-29 16:03:21.584079283 +0000 UTC m=+2568198.870559371
+Received: from Njg3MTA3Mw (unknown)
+	by geopod-ismtpd-canary-0 (SG) with HTTP
+	id F8tAXk3sSPSAfQqcNyaJiw
+	Sat, 29 Oct 2022 16:03:21.423 +0000 (UTC)
+Content-Type: multipart/alternative; boundary=34f48b74ba8b65fd8095a5e6b239bb8b52bae2b0354f4f505093f8f5767c
+Date: Sat, 29 Oct 2022 16:03:27 +0000 (UTC)
+From: BetaList Digest <digest@betalist.com>
+Mime-Version: 1.0
+Message-ID: <F8tAXk3sSPSAfQqcNyaJiw@geopod-ismtpd-canary-0>
+Subject: Swapflo, Appero.io, Amichita, and Raw Query
+X-SG-EID: 
+ =?us-ascii?Q?v4K80sv8GIGXqf4PP=2FMu0ARGJBIwsB0U4U3YWkEMAwaPCjZfRILYsFzrovbSvU?=
+ =?us-ascii?Q?6q4gl910deyE2sZMtB1tyA2N+14ppeyVGZK4Wn3?=
+ =?us-ascii?Q?2vcfulBlg=2FHKRlnXhimrFOk2NRNAdD5Z3iLmf1X?=
+ =?us-ascii?Q?5m9ph=2Ff8ez4zaEFRk8QXrrK0rqZuDxFJG6X+2E9?=
+ =?us-ascii?Q?yC3dGOrbrKl7a52TL99AohP38yDQ=2FJcuLiNsGoN?=
+ =?us-ascii?Q?nVM4vXkIdyiIZ+=2Fuo3OkP3daGGPFr0eLB2g1gx?=
+To: Andris Reinman <andris@kreata.ee>
+X-Entity-ID: oZ7D7MN15/uuyrzzl8oJAw==
+
+--34f48b74ba8b65fd8095a5e6b239bb8b52bae2b0354f4f505093f8f5767c
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Mime-Version: 1.0
+
+Digital business cards for Apple & Google Wallet
+
+BetaList=20
+( https://betalist.com/ahoy/click?c=3Dnewsletter&s=3Dk2xZaqG8VFX7p5EDImufRC=
+KciO2RU4TodECOzlvoKH8&t=3DOTYXmBTtmve1iKgfCO43AA1rLAzZWTjz&u=3Dhttps%3A%2F%=
+2Fbetalist.com%2F%3Futm_source%3Dnewsletter_mailer%26utm_medium%3Demail%26u=
+tm_campaign%3Droundup )
+
+
+BetaList Daily
+
+Swapflo=20
+( https://betalist.com/ahoy/click?c=3Dnewsletter&s=3Dix9vo6rfHucB6ejpv9kPue=
+_HF1HfA-lJD4vpkCWVM_s&t=3DOTYXmBTtmve1iKgfCO43AA1rLAzZWTjz&u=3Dhttps%3A%2F%=
+2Fbetalist.com%2Fstartups%2Fswapflo%3Futm_source%3Dnewsletter_mailer%26utm_=
+medium%3Demail%26utm_campaign%3Droundup )
+
+
+Digital business cards for Apple & Google Wallet=20
+( https://betalist.com/ahoy/click?c=3Dnewsletter&s=3Dix9vo6rfHucB6ejpv9kPue=
+_HF1HfA-lJD4vpkCWVM_s&t=3DOTYXmBTtmve1iKgfCO43AA1rLAzZWTjz&u=3Dhttps%3A%2F%=
+2Fbetalist.com%2Fstartups%2Fswapflo%3Futm_source%3Dnewsletter_mailer%26utm_=
+medium%3Demail%26utm_campaign%3Droundup )
+
+
+Amichita=20
+( https://betalist.com/ahoy/click?c=3Dnewsletter&s=3DbZ6dIthm_4zjBg5b98ZN3y=
+paDVRLxEf_tD1P4YfpORQ&t=3DOTYXmBTtmve1iKgfCO43AA1rLAzZWTjz&u=3Dhttps%3A%2F%=
+2Fbetalist.com%2Fstartups%2Famichita%3Futm_source%3Dnewsletter_mailer%26utm=
+_medium%3Demail%26utm_campaign%3Droundup )
+
+
+Patreon with a bit of Discord feeling in Web3=20
+( https://betalist.com/ahoy/click?c=3Dnewsletter&s=3DbZ6dIthm_4zjBg5b98ZN3y=
+paDVRLxEf_tD1P4YfpORQ&t=3DOTYXmBTtmve1iKgfCO43AA1rLAzZWTjz&u=3Dhttps%3A%2F%=
+2Fbetalist.com%2Fstartups%2Famichita%3Futm_source%3Dnewsletter_mailer%26utm=
+_medium%3Demail%26utm_campaign%3Droundup )
+
+
+Appero.io=20
+( https://betalist.com/ahoy/click?c=3Dnewsletter&s=3DtFRbJz8gSUl2idnwEp1KYD=
+nhj8NO9rYGV356YVgi1r8&t=3DOTYXmBTtmve1iKgfCO43AA1rLAzZWTjz&u=3Dhttps%3A%2F%=
+2Fbetalist.com%2Fstartups%2Fappero-io%3Futm_source%3Dnewsletter_mailer%26ut=
+m_medium%3Demail%26utm_campaign%3Droundup )
+
+Exclusive Perk=20
+( https://betalist.com/ahoy/click?c=3Dnewsletter&s=3DtFRbJz8gSUl2idnwEp1KYD=
+nhj8NO9rYGV356YVgi1r8&t=3DOTYXmBTtmve1iKgfCO43AA1rLAzZWTjz&u=3Dhttps%3A%2F%=
+2Fbetalist.com%2Fstartups%2Fappero-io%3Futm_source%3Dnewsletter_mailer%26ut=
+m_medium%3Demail%26utm_campaign%3Droundup )
+
+
+Build client portal and centralize client communication in one
+place=20
+( https://betalist.com/ahoy/click?c=3Dnewsletter&s=3DtFRbJz8gSUl2idnwEp1KYD=
+nhj8NO9rYGV356YVgi1r8&t=3DOTYXmBTtmve1iKgfCO43AA1rLAzZWTjz&u=3Dhttps%3A%2F%=
+2Fbetalist.com%2Fstartups%2Fappero-io%3Futm_source%3Dnewsletter_mailer%26ut=
+m_medium%3Demail%26utm_campaign%3Droundup )
+
+
+Raw Query=20
+( https://betalist.com/ahoy/click?c=3Dnewsletter&s=3D_kvvJZbbzIyOruvfaLHIgX=
+mqdz3V_orXbrhAi-8fmt4&t=3DOTYXmBTtmve1iKgfCO43AA1rLAzZWTjz&u=3Dhttps%3A%2F%=
+2Fbetalist.com%2Fstartups%2Fraw-query%3Futm_source%3Dnewsletter_mailer%26ut=
+m_medium%3Demail%26utm_campaign%3Droundup )
+
+Exclusive Perk=20
+( https://betalist.com/ahoy/click?c=3Dnewsletter&s=3D_kvvJZbbzIyOruvfaLHIgX=
+mqdz3V_orXbrhAi-8fmt4&t=3DOTYXmBTtmve1iKgfCO43AA1rLAzZWTjz&u=3Dhttps%3A%2F%=
+2Fbetalist.com%2Fstartups%2Fraw-query%3Futm_source%3Dnewsletter_mailer%26ut=
+m_medium%3Demail%26utm_campaign%3Droundup )
+
+
+Chat with your database=20
+( https://betalist.com/ahoy/click?c=3Dnewsletter&s=3D_kvvJZbbzIyOruvfaLHIgX=
+mqdz3V_orXbrhAi-8fmt4&t=3DOTYXmBTtmve1iKgfCO43AA1rLAzZWTjz&u=3Dhttps%3A%2F%=
+2Fbetalist.com%2Fstartups%2Fraw-query%3Futm_source%3Dnewsletter_mailer%26ut=
+m_medium%3Demail%26utm_campaign%3Droundup )
+
+
+Render ( https://betalist.com/promotions/67348a81-80ea-4103-b070-e5cd011f02=
+f7/visit?slot=3Dnewsletter )
+Sponsor=20
+( https://betalist.com/ahoy/click?c=3Dnewsletter&s=3D5IddcFkGM4czWu4Kt9fk7v=
+dh4phg9C6hMFavdPmpNyc&t=3DOTYXmBTtmve1iKgfCO43AA1rLAzZWTjz&u=3Dhttps%3A%2F%=
+2Fbetalist.com%2Fadvertise%3Futm_source%3Dnewsletter_mailer%26utm_medium%3D=
+email%26utm_campaign%3Droundup )
+
+
+Try the powerful and modern Heroku alternative for free ( https://betalist.=
+com/promotions/67348a81-80ea-4103-b070-e5cd011f02f7/visit?slot=3Dnewsletter=
+ )
+
+Too much email in your life?
+
+Switch to weekly emails ( https://betalist.com/newsletter/update?email=3Dan=
+dris%40kreata.ee&euid=3D2230112450&frequency=3Dweekly )
+or
+stop receiving emails. ( https://betalist.us1.list-manage.com/unsubscribe?u=
+=3D64887c4303114a08f2035cf17&id=3D6c2151903c&EMAIL=3Dandris@kreata.ee )
+--34f48b74ba8b65fd8095a5e6b239bb8b52bae2b0354f4f505093f8f5767c
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=iso-8859-1
+Mime-Version: 1.0
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF-8">
+<style>body {
+background-color: #ffffff; font-family: Helvetica, Arial, sans-serif; paddi=
+ng: 0; margin: 0;
+}
+.introduction__body a:visited {
+color: #79acac; text-decoration: none;
+}
+.introduction__body a:hover {
+color: #497676;
+}
+.startup__screenshot:hover {
+border-color: rgba(0,0,0,0.3) !important;
+}
+.startup__name:hover {
+text-decoration: underline !important;
+}
+.startup__pitch:hover {
+text-decoration: underline !important;
+}
+.footer__link:hover {
+text-decoration: underline !important;
+}
+</style>
+</head>
+<body style=3D"font-family: Helvetica, Arial, sans-serif; margin: 0; paddin=
+g: 0;" bgcolor=3D"#ffffff">
+
+
+<div class=3D"preheader" style=3D"font-size: 1px; color: #ffffff;">
+Digital business cards for Apple &amp; Google Wallet
+</div>
+<table border=3D"0" cellpadding=3D"20" cellspacing=3D"0" width=3D"100%">
+<tr>
+<td>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cl=
+ass=3D"container" style=3D"min-width: 250px; max-width: 500px; width: 100%;=
+">
+<tr>
+<td height=3D"20" style=3D"font-size: 0; line-height: 0;">=A0</td>
+</tr>
+<tr>
+<td align=3D"center">
+<a href=3D"https://betalist.com/ahoy/click?c=3Dnewsletter&amp;s=3Dk2xZaqG8V=
+FX7p5EDImufRCKciO2RU4TodECOzlvoKH8&amp;t=3DOTYXmBTtmve1iKgfCO43AA1rLAzZWTjz=
+&amp;u=3Dhttps%3A%2F%2Fbetalist.com%2F%3Futm_source%3Dnewsletter_mailer%26u=
+tm_medium%3Demail%26utm_campaign%3Droundup"><img alt=3D"BetaList" height=3D=
+"56" width=3D"56" border=3D"0" src=3D"http://betalist.com/assets/mailers/ne=
+wsletter_mailer/logo@2x-737769cb3c88769d9632a782ea19b4d370cdc4cb44985731fa0=
+6b48f69e87637.png"></a>
+</td>
+</tr>
+<tr>
+<td height=3D"30" style=3D"font-size: 0; line-height: 0;">=A0</td>
+</tr>
+<tr>
+<td class=3D"header__title" style=3D"font-weight: normal; font-size: 18px; =
+color: #262626; padding-bottom: 20px;" align=3D"center">
+BetaList Daily
+</td>
+</tr>
+<tr>
+<td height=3D"50" style=3D"font-size: 0; line-height: 0;">=A0</td>
+</tr>
+<tr>
+<td>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%">
+<tr class=3D"startup">
+<td class=3D"column" valign=3D"top" width=3D"120">
+<a class=3D"startup__screenshot" href=3D"https://betalist.com/ahoy/click?c=
+=3Dnewsletter&amp;s=3Dix9vo6rfHucB6ejpv9kPue_HF1HfA-lJD4vpkCWVM_s&amp;t=3DO=
+TYXmBTtmve1iKgfCO43AA1rLAzZWTjz&amp;u=3Dhttps%3A%2F%2Fbetalist.com%2Fstartu=
+ps%2Fswapflo%3Futm_source%3Dnewsletter_mailer%26utm_medium%3Demail%26utm_ca=
+mpaign%3Droundup" style=3D"border-radius: 2px; overflow: hidden; display: b=
+lock; position: relative; width: 120px; border: 1px solid rgba(0,0,0,0.1);"=
+><img style=3D"display: block;" alt=3D"" height=3D"90" width=3D"120" src=3D=
+"https://img.betalist.com/ZOYiWtmhm57BcvGU_QBRsL7tbZ5giO6Mm8UHWRuC1tM/rt:fi=
+ll/w:240/h:180/plain/s3://assets.betalist.com/attachment/178307/image/99d4a=
+662499e18ab6069eb5155815061.png">
+</a>
+</td>
+<td class=3D"column" style=3D"font-size: 0; line-height: 0;" width=3D"15">=
+=A0</td>
+<td class=3D"column">
+<table border=3D"0" cellpadding=3D"1" cellspacing=3D"0" width=3D"100%">
+<tr>
+<td>
+<a class=3D"startup__name" href=3D"https://betalist.com/ahoy/click?c=3Dnews=
+letter&amp;s=3Dix9vo6rfHucB6ejpv9kPue_HF1HfA-lJD4vpkCWVM_s&amp;t=3DOTYXmBTt=
+mve1iKgfCO43AA1rLAzZWTjz&amp;u=3Dhttps%3A%2F%2Fbetalist.com%2Fstartups%2Fsw=
+apflo%3Futm_source%3Dnewsletter_mailer%26utm_medium%3Demail%26utm_campaign%=
+3Droundup" style=3D"font-size: 16px; font-weight: bold; color: #0162BF !imp=
+ortant; line-height: 21px; text-decoration: none; display: inline-block; ma=
+rgin-right: 3px;">Swapflo</a>
+</td>
+</tr>
+<tr>
+<td><a class=3D"startup__pitch" href=3D"https://betalist.com/ahoy/click?c=
+=3Dnewsletter&amp;s=3Dix9vo6rfHucB6ejpv9kPue_HF1HfA-lJD4vpkCWVM_s&amp;t=3DO=
+TYXmBTtmve1iKgfCO43AA1rLAzZWTjz&amp;u=3Dhttps%3A%2F%2Fbetalist.com%2Fstartu=
+ps%2Fswapflo%3Futm_source%3Dnewsletter_mailer%26utm_medium%3Demail%26utm_ca=
+mpaign%3Droundup" style=3D"font-size: 16px; color: #3D5670 !important; line=
+-height: 22px; text-decoration: none;">Digital business cards for Apple &am=
+p; Google Wallet</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td height=3D"30" style=3D"font-size: 0; line-height: 0;">=A0</td>
+</tr>
+<tr class=3D"startup">
+<td class=3D"column" valign=3D"top" width=3D"120">
+<a class=3D"startup__screenshot" href=3D"https://betalist.com/ahoy/click?c=
+=3Dnewsletter&amp;s=3DbZ6dIthm_4zjBg5b98ZN3ypaDVRLxEf_tD1P4YfpORQ&amp;t=3DO=
+TYXmBTtmve1iKgfCO43AA1rLAzZWTjz&amp;u=3Dhttps%3A%2F%2Fbetalist.com%2Fstartu=
+ps%2Famichita%3Futm_source%3Dnewsletter_mailer%26utm_medium%3Demail%26utm_c=
+ampaign%3Droundup" style=3D"border-radius: 2px; overflow: hidden; display: =
+block; position: relative; width: 120px; border: 1px solid rgba(0,0,0,0.1);=
+"><img style=3D"display: block;" alt=3D"" height=3D"90" width=3D"120" src=
+=3D"https://img.betalist.com/Y4pMGsRJ2wDqh55EP0m80oD4HE6FG8Ili8RVne8yUBk/rt=
+:fill/w:240/h:180/plain/s3://assets.betalist.com/attachment/178298/image/38=
+ef9fc389f862347e201fb73e3fafea.png">
+</a>
+</td>
+<td class=3D"column" style=3D"font-size: 0; line-height: 0;" width=3D"15">=
+=A0</td>
+<td class=3D"column">
+<table border=3D"0" cellpadding=3D"1" cellspacing=3D"0" width=3D"100%">
+<tr>
+<td>
+<a class=3D"startup__name" href=3D"https://betalist.com/ahoy/click?c=3Dnews=
+letter&amp;s=3DbZ6dIthm_4zjBg5b98ZN3ypaDVRLxEf_tD1P4YfpORQ&amp;t=3DOTYXmBTt=
+mve1iKgfCO43AA1rLAzZWTjz&amp;u=3Dhttps%3A%2F%2Fbetalist.com%2Fstartups%2Fam=
+ichita%3Futm_source%3Dnewsletter_mailer%26utm_medium%3Demail%26utm_campaign=
+%3Droundup" style=3D"font-size: 16px; font-weight: bold; color: #0162BF !im=
+portant; line-height: 21px; text-decoration: none; display: inline-block; m=
+argin-right: 3px;">Amichita</a>
+</td>
+</tr>
+<tr>
+<td><a class=3D"startup__pitch" href=3D"https://betalist.com/ahoy/click?c=
+=3Dnewsletter&amp;s=3DbZ6dIthm_4zjBg5b98ZN3ypaDVRLxEf_tD1P4YfpORQ&amp;t=3DO=
+TYXmBTtmve1iKgfCO43AA1rLAzZWTjz&amp;u=3Dhttps%3A%2F%2Fbetalist.com%2Fstartu=
+ps%2Famichita%3Futm_source%3Dnewsletter_mailer%26utm_medium%3Demail%26utm_c=
+ampaign%3Droundup" style=3D"font-size: 16px; color: #3D5670 !important; lin=
+e-height: 22px; text-decoration: none;">Patreon with a bit of Discord feeli=
+ng in Web3</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td height=3D"30" style=3D"font-size: 0; line-height: 0;">=A0</td>
+</tr>
+<tr class=3D"startup">
+<td class=3D"column" valign=3D"top" width=3D"120">
+<a class=3D"startup__screenshot" href=3D"https://betalist.com/ahoy/click?c=
+=3Dnewsletter&amp;s=3DtFRbJz8gSUl2idnwEp1KYDnhj8NO9rYGV356YVgi1r8&amp;t=3DO=
+TYXmBTtmve1iKgfCO43AA1rLAzZWTjz&amp;u=3Dhttps%3A%2F%2Fbetalist.com%2Fstartu=
+ps%2Fappero-io%3Futm_source%3Dnewsletter_mailer%26utm_medium%3Demail%26utm_=
+campaign%3Droundup" style=3D"border-radius: 2px; overflow: hidden; display:=
+ block; position: relative; width: 120px; border: 1px solid rgba(0,0,0,0.1)=
+;"><img style=3D"background-color: #dadade; display: block;" alt=3D"" heigh=
+t=3D"90" width=3D"120" src=3D"https://img.betalist.com/E5YFoX74dlXP_Ti9UwR5=
+slSBPSLLIJgoVGscNhFUWSs/rt:fill/w:240/h:180/plain/s3://assets.betalist.com/=
+attachment/177768/image/4632bc32f7081761a9b7ca1e2a476064.png">
+</a>
+</td>
+<td class=3D"column" style=3D"font-size: 0; line-height: 0;" width=3D"15">=
+=A0</td>
+<td class=3D"column">
+<table border=3D"0" cellpadding=3D"1" cellspacing=3D"0" width=3D"100%">
+<tr>
+<td>
+<a class=3D"startup__name" href=3D"https://betalist.com/ahoy/click?c=3Dnews=
+letter&amp;s=3DtFRbJz8gSUl2idnwEp1KYDnhj8NO9rYGV356YVgi1r8&amp;t=3DOTYXmBTt=
+mve1iKgfCO43AA1rLAzZWTjz&amp;u=3Dhttps%3A%2F%2Fbetalist.com%2Fstartups%2Fap=
+pero-io%3Futm_source%3Dnewsletter_mailer%26utm_medium%3Demail%26utm_campaig=
+n%3Droundup" style=3D"font-size: 16px; font-weight: bold; color: #0162BF !i=
+mportant; line-height: 21px; text-decoration: none; display: inline-block; =
+margin-right: 3px;">Appero.io</a>
+<a class=3D"startup__earlyAccess" href=3D"https://betalist.com/ahoy/click?c=
+=3Dnewsletter&amp;s=3DtFRbJz8gSUl2idnwEp1KYDnhj8NO9rYGV356YVgi1r8&amp;t=3DO=
+TYXmBTtmve1iKgfCO43AA1rLAzZWTjz&amp;u=3Dhttps%3A%2F%2Fbetalist.com%2Fstartu=
+ps%2Fappero-io%3Futm_source%3Dnewsletter_mailer%26utm_medium%3Demail%26utm_=
+campaign%3Droundup" style=3D"display: inline-block; background-color: #FFEF=
+77; border-radius: 2px; font-size: 10px; color: #655E07; margin-right: 3px;=
+ text-decoration: none; text-transform: uppercase; padding: 4px;">Exclusive=
+ Perk</a>
+</td>
+</tr>
+<tr>
+<td><a class=3D"startup__pitch" href=3D"https://betalist.com/ahoy/click?c=
+=3Dnewsletter&amp;s=3DtFRbJz8gSUl2idnwEp1KYDnhj8NO9rYGV356YVgi1r8&amp;t=3DO=
+TYXmBTtmve1iKgfCO43AA1rLAzZWTjz&amp;u=3Dhttps%3A%2F%2Fbetalist.com%2Fstartu=
+ps%2Fappero-io%3Futm_source%3Dnewsletter_mailer%26utm_medium%3Demail%26utm_=
+campaign%3Droundup" style=3D"font-size: 16px; color: #3D5670 !important; li=
+ne-height: 22px; text-decoration: none;">Build client portal and centralize=
+ client communication in one place</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td height=3D"30" style=3D"font-size: 0; line-height: 0;">=A0</td>
+</tr>
+<tr class=3D"startup">
+<td class=3D"column" valign=3D"top" width=3D"120">
+<a class=3D"startup__screenshot" href=3D"https://betalist.com/ahoy/click?c=
+=3Dnewsletter&amp;s=3D_kvvJZbbzIyOruvfaLHIgXmqdz3V_orXbrhAi-8fmt4&amp;t=3DO=
+TYXmBTtmve1iKgfCO43AA1rLAzZWTjz&amp;u=3Dhttps%3A%2F%2Fbetalist.com%2Fstartu=
+ps%2Fraw-query%3Futm_source%3Dnewsletter_mailer%26utm_medium%3Demail%26utm_=
+campaign%3Droundup" style=3D"border-radius: 2px; overflow: hidden; display:=
+ block; position: relative; width: 120px; border: 1px solid rgba(0,0,0,0.1)=
+;"><img style=3D"display: block;" alt=3D"" height=3D"90" width=3D"120" src=
+=3D"https://img.betalist.com/Rrcjj9O73wi2hWr6-tIklizYYAid6loW52YT6pfQptc/rt=
+:fill/w:240/h:180/plain/s3://assets.betalist.com/attachment/178447/image/32=
+4c215b9704309c0bed747c39852bd5.png">
+</a>
+</td>
+<td class=3D"column" style=3D"font-size: 0; line-height: 0;" width=3D"15">=
+=A0</td>
+<td class=3D"column">
+<table border=3D"0" cellpadding=3D"1" cellspacing=3D"0" width=3D"100%">
+<tr>
+<td>
+<a class=3D"startup__name" href=3D"https://betalist.com/ahoy/click?c=3Dnews=
+letter&amp;s=3D_kvvJZbbzIyOruvfaLHIgXmqdz3V_orXbrhAi-8fmt4&amp;t=3DOTYXmBTt=
+mve1iKgfCO43AA1rLAzZWTjz&amp;u=3Dhttps%3A%2F%2Fbetalist.com%2Fstartups%2Fra=
+w-query%3Futm_source%3Dnewsletter_mailer%26utm_medium%3Demail%26utm_campaig=
+n%3Droundup" style=3D"font-size: 16px; font-weight: bold; color: #0162BF !i=
+mportant; line-height: 21px; text-decoration: none; display: inline-block; =
+margin-right: 3px;">Raw Query</a>
+<a class=3D"startup__earlyAccess" href=3D"https://betalist.com/ahoy/click?c=
+=3Dnewsletter&amp;s=3D_kvvJZbbzIyOruvfaLHIgXmqdz3V_orXbrhAi-8fmt4&amp;t=3DO=
+TYXmBTtmve1iKgfCO43AA1rLAzZWTjz&amp;u=3Dhttps%3A%2F%2Fbetalist.com%2Fstartu=
+ps%2Fraw-query%3Futm_source%3Dnewsletter_mailer%26utm_medium%3Demail%26utm_=
+campaign%3Droundup" style=3D"display: inline-block; background-color: #FFEF=
+77; border-radius: 2px; font-size: 10px; color: #655E07; margin-right: 3px;=
+ text-decoration: none; text-transform: uppercase; padding: 4px;">Exclusive=
+ Perk</a>
+</td>
+</tr>
+<tr>
+<td><a class=3D"startup__pitch" href=3D"https://betalist.com/ahoy/click?c=
+=3Dnewsletter&amp;s=3D_kvvJZbbzIyOruvfaLHIgXmqdz3V_orXbrhAi-8fmt4&amp;t=3DO=
+TYXmBTtmve1iKgfCO43AA1rLAzZWTjz&amp;u=3Dhttps%3A%2F%2Fbetalist.com%2Fstartu=
+ps%2Fraw-query%3Futm_source%3Dnewsletter_mailer%26utm_medium%3Demail%26utm_=
+campaign%3Droundup" style=3D"font-size: 16px; color: #3D5670 !important; li=
+ne-height: 22px; text-decoration: none;">Chat with your database</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td height=3D"30" style=3D"font-size: 0; line-height: 0;">=A0</td>
+</tr>
+
+</table>
+</td>
+</tr>
+<tr>
+<td height=3D"50" style=3D"font-size: 0; line-height: 0;">=A0</td>
+</tr>
+<tr>
+<td class=3D"sponsor" style=3D"padding: 10px;" bgcolor=3D"#F0F2F2">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%">
+<tr class=3D"startup">
+<td class=3D"column" valign=3D"top" width=3D"120">
+<a class=3D"startup__screenshot" data-skip-click=3D"true" href=3D"https://b=
+etalist.com/promotions/67348a81-80ea-4103-b070-e5cd011f02f7/visit?slot=3Dne=
+wsletter" style=3D"border-radius: 2px; overflow: hidden; display: block; po=
+sition: relative; width: 120px; border: 1px solid rgba(0,0,0,0.1);"><img al=
+t=3D"" height=3D"90" src=3D"https://img.betalist.com/mjfvnNiykLG1aZwLfOghnm=
+YjUs937qarWW36ZEJM-8g/rt:fill/w:240/h:180/plain/s3://assets.betalist.com/pr=
+omotion/196/image/013f672e936c9af5c536bc4afcbc539d.png" style=3D"background=
+-color: ; display: block;" width=3D"120">
+</a>
+</td>
+<td class=3D"column" style=3D"font-size: 0; line-height: 0;" width=3D"15">=
+=A0</td>
+<td class=3D"column">
+<table border=3D"0" cellpadding=3D"1" cellspacing=3D"0" width=3D"100%">
+<tr>
+<td>
+<a class=3D"startup__name" data-skip-click=3D"true" href=3D"https://betalis=
+t.com/promotions/67348a81-80ea-4103-b070-e5cd011f02f7/visit?slot=3Dnewslett=
+er" style=3D"font-size: 16px; font-weight: bold; color: #0162BF !important;=
+ line-height: 21px; text-decoration: none; display: inline-block; margin-ri=
+ght: 3px;">Render</a>
+<a class=3D"startup__promotion" href=3D"https://betalist.com/ahoy/click?c=
+=3Dnewsletter&amp;s=3D5IddcFkGM4czWu4Kt9fk7vdh4phg9C6hMFavdPmpNyc&amp;t=3DO=
+TYXmBTtmve1iKgfCO43AA1rLAzZWTjz&amp;u=3Dhttps%3A%2F%2Fbetalist.com%2Fadvert=
+ise%3Futm_source%3Dnewsletter_mailer%26utm_medium%3Demail%26utm_campaign%3D=
+roundup" style=3D"display: inline-block; border-radius: 2px; background-col=
+or: #586A6A; font-size: 10px; color: #EDF5F5; margin-right: 3px; margin-bot=
+tom: 3px; text-decoration: none; text-transform: uppercase; letter-spacing:=
+ 0.3px; padding: 4px;">Sponsor</a>
+</td>
+</tr>
+<tr>
+<td><a class=3D"startup__pitch" data-skip-click=3D"true" href=3D"https://be=
+talist.com/promotions/67348a81-80ea-4103-b070-e5cd011f02f7/visit?slot=3Dnew=
+sletter" style=3D"font-size: 16px; color: #3D5670 !important; line-height: =
+22px; text-decoration: none;">Try the powerful and modern Heroku alternativ=
+e for free</a></td>
+</tr>
+</table>
+</td>
+</tr>
+
+</table>
+</td>
+</tr>
+<tr>
+<td height=3D"40" style=3D"font-size: 0; line-height: 0;">=A0</td>
+</tr>
+<tr class=3D"footer">
+<td>
+<table width=3D"100%">
+<tr>
+<td class=3D"column footer__body" style=3D"font-size: 14px; color: #3D5670;=
+ line-height: 1.5;" align=3D"center">
+</td>
+</tr>
+<tr>
+<td class=3D"column footer__body" style=3D"font-size: 14px; color: #3D5670;=
+ line-height: 1.5;" align=3D"center">
+Too much email in your life?
+<br>
+<a class=3D"footer__link" href=3D"https://betalist.com/newsletter/update?em=
+ail=3Dandris%40kreata.ee&euid=3D2230112450&frequency=3Dweekly" style=3D"col=
+or: #0162BF; text-decoration: none; font-weight: bold;">Switch to weekly em=
+ails</a>
+or
+<a class=3D"footer__link" href=3D"https://betalist.us1.list-manage.com/unsu=
+bscribe?u=3D64887c4303114a08f2035cf17&id=3D6c2151903c&EMAIL=3Dandris@kreata=
+.ee" style=3D"color: #0162BF; text-decoration: none; font-weight: bold;">st=
+op receiving emails.</a>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td height=3D"50" style=3D"font-size: 0; line-height: 0;">=A0</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<img src=3D"http://url2151.betalist.com/wf/open?upn=3Dn3ivV88DBqSAFZph1AqI8=
+-2B6Cfs4HhpJWy6PkdHk7JPQ3iE0i3oW2Fs8xHOQeXDXj64Aw3tIh62ltSIBRkDtTAFrRIzbgu-=
+2BO-2BOtkJGRHKUF6M2dQKJ-2B2r5guawsshRISCT-2Fn-2FN-2BmZleexilua8V0PjiXecN0kp=
+Oy56zGBXftvdcHTfaaFs8auCzrpI5hf5YJJGQnTcRhDj77MiGiI2NZGVmwnCOOJeU6cEhTsOyNJ=
+1Ok-3D" alt=3D"" width=3D"1" height=3D"1" border=3D"0" style=3D"height:1px =
+!important;width:1px !important;border-width:0 !important;margin-top:0 !imp=
+ortant;margin-bottom:0 !important;margin-right:0 !important;margin-left:0 !=
+important;padding-top:0 !important;padding-bottom:0 !important;padding-righ=
+t:0 !important;padding-left:0 !important;"/></body>
+</html>
+
+--34f48b74ba8b65fd8095a5e6b239bb8b52bae2b0354f4f505093f8f5767c--

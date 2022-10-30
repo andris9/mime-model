@@ -1,0 +1,29 @@
+{
+    "name": "mimetree",
+    "version": "1.0.0",
+    "description": "Parse and compile mime trees",
+    "main": "lib/mimetree.js",
+    "dependencies": {
+        "libmime": "5.1.0"
+    },
+    "devDependencies": {
+        "eslint-config-nodemailer": "1.2.0",
+        "eslint-config-prettier": "8.5.0"
+    },
+    "scripts": {
+        "test": "node --test test/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/andris9/mimetree.git"
+    },
+    "keywords": [
+        "MIME"
+    ],
+    "author": "Andris Reinman",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/andris9/mimetree/issues"
+    },
+    "homepage": "https://github.com/andris9/mimetree#readme"
+}
