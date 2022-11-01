@@ -33,7 +33,20 @@ async function run(list) {
                 console.log(fPath);
                 console.log(sourceHash);
                 console.log(destHash);
+
+                console.log(
+                    JSON.stringify(
+                        {
+                            ins: eml.toString(),
+                            out: compiled.toString()
+                        },
+                        false,
+                        2
+                    )
+                );
+
                 console.log('-------------------\n');
+                throw new Error('No match');
             }
         } catch (err) {
             console.error('Failed processing %s', fPath);
