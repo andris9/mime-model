@@ -1,8 +1,8 @@
 {
-    "name": "mimetree",
-    "version": "1.0.0",
-    "description": "Parse and compile mime trees",
-    "main": "lib/mime-tree.js",
+    "name": "mime-model",
+    "version": "1.0.0-pre.01",
+    "description": "Parse and compile mime nodes",
+    "main": "lib/mime-model.js",
     "dependencies": {
         "libmime": "5.1.0"
     },
@@ -15,7 +15,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/andris9/mimetree.git"
+        "url": "git+https://github.com/andris9/mime-model.git"
     },
     "keywords": [
         "MIME"
@@ -23,7 +23,7 @@
     "author": "Andris Reinman",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/andris9/mimetree/issues"
+        "url": "https://github.com/andris9/mime-model/issues"
     },
-    "homepage": "https://github.com/andris9/mimetree#readme"
+    "homepage": "https://github.com/andris9/mime-model#readme"
 }

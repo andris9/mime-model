@@ -1,7 +1,7 @@
 'use strict';
 
 const util = require('util');
-const { MimeNode } = require('./lib/mime-tree');
+const { MimeNode } = require('./lib/mime-model');
 console.log(MimeNode);
 
 const fs = require('fs');

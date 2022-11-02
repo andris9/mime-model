@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const Path = require('path');
-const { MimeTree } = require('./lib/mime-tree');
+const { MimeNode } = require('./lib/mime-model');
 const basePath = process.argv[2] || '.';
 
 const { createHash } = require('crypto');
@@ -22,8 +22,7 @@ async function run(list) {
 
             let sourceHash = createHash('md5').update(eml).digest('hex');
 
-            let mp = MimeTree.create({});
-            await mp.parse(eml);
+            let mp = await MimeNode.from(eml, {});
             let compiled = await mp.serialize();
 
             let destHash = createHash('md5').update(compiled).digest('hex');
