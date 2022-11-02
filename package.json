@@ -4,6 +4,7 @@
     "description": "Parse and compile mime nodes",
     "main": "lib/mime-model.js",
     "dependencies": {
+        "libbase64": "^1.2.1",
         "libmime": "5.1.0",
         "uuid": "^9.0.0"
     },

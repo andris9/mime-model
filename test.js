@@ -85,7 +85,8 @@ async function main() {
         }
     );
 
-    let n3 = MimeNode.create('text/plain');
+    let n3 = MimeNode.create('text/plain', { encoding: 'base64' });
+    n3.setContent(Buffer.alloc(10 * 1024));
 
     n1.appendChild(n2);
     n2.appendChild(n3);
