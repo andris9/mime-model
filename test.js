@@ -44,35 +44,58 @@ ysourceEml = Buffer.from(
     ).replace(/\r?\n/g, '\n')
 );
 
-MimeNode.from(sourceEml, {
-    //lineBr: '\r\n'
-    //defaultBr: '\n'
-})
-    .then(mp => {
-        let walk = (node, level) => {
-            let prefix = ' '.repeat(level * 2);
-            console.log(`${prefix}${node.contentType}`);
-            let childNodes = node.getChildNodes();
-            if (childNodes) {
-                for (let childNode of childNodes) {
-                    walk(childNode, level + 1);
-                }
+async function main() {
+    let mp = await MimeNode.from(sourceEml, {
+        //lineBr: '\r\n'
+        //defaultBr: '\n'
+    });
+
+    let walk = (node, level) => {
+        let prefix = ' '.repeat(level * 2);
+        console.log(`${prefix}${node.contentType}`);
+        let childNodes = node.getChildNodes();
+        if (childNodes) {
+            for (let childNode of childNodes) {
+                walk(childNode, level + 1);
             }
-        };
+        }
+    };
 
-        walk(mp, 0);
+    walk(mp, 0);
 
-        //console.log(mp.getChildNodes());
-        //console.log(util.inspect(mp, false, 22, true));
-        //console.log(JSON.stringify(mp, false, 2));
-        /*    
-process.stdout.write('>>>');
-    process.stdout.write(mp.rootNode.getRawHeaders());
-    process.stdout.write('<<<\n');
-*/
+    let output = await mp.serialize();
 
-        return mp.serialize();
-    })
-    .then(output => {
-        process.stdout.write(output);
+    process.stdout.write(output);
+
+    console.log('Q1:');
+
+    let n1 = MimeNode.create(
+        'multipart/mixed',
+        {},
+        {
+            lineBr: '\n'
+        }
+    );
+
+    let n2 = MimeNode.create(
+        'multipart/alternative',
+        {},
+        {
+            lineBr: '\n'
+        }
+    );
+
+    let n3 = MimeNode.create('text/plain');
+
+    n1.appendChild(n2);
+    n2.appendChild(n3);
+
+    process.stdout.write(await n1.serialize());
+}
+
+main()
+    .then(() => console.log('DONE'))
+    .catch(err => {
+        console.error(err);
+        process.exit(1);
     });

@@ -4,7 +4,8 @@
     "description": "Parse and compile mime nodes",
     "main": "lib/mime-model.js",
     "dependencies": {
-        "libmime": "5.1.0"
+        "libmime": "5.1.0",
+        "uuid": "^9.0.0"
     },
     "devDependencies": {
         "eslint-config-nodemailer": "1.2.0",
