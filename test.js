@@ -88,8 +88,14 @@ async function main() {
     let n3 = MimeNode.create('text/plain', { encoding: 'base64' });
     n3.setContent(Buffer.alloc(10 * 1024));
 
+    let n4 = MimeNode.create('text/html', { encoding: 'quoted-printable' });
+    n4.setContent(
+        'Οὐχὶ ταὐτὰ παρίσταταί μοι γιγνώσκειν, ὦ ἄνδρες ᾿Αθηναῖοι, ὅταν τ᾿ εἰς τὰ πράγματα ἀποβλέψω καὶ ὅταν πρὸς τοὺς λόγους οὓς ἀκούω· τοὺς μὲν γὰρ λόγους περὶ τοῦ τιμωρήσασθαι Φίλιππον ὁρῶ γιγνομένους, τὰ δὲ πράγματ᾿'
+    );
+
     n1.appendChild(n2);
     n2.appendChild(n3);
+    n2.appendChild(n4);
 
     process.stdout.write(await n1.serialize());
 }
