@@ -23,6 +23,23 @@ async function run(list) {
             let sourceHash = createHash('md5').update(eml).digest('hex');
 
             let mp = await MimeNode.from(eml, {});
+
+            let walk = (node, level) => {
+                let prefix = ' '.repeat(level * 2);
+                let u = [];
+                u.push(`${prefix}${node.contentType}`);
+
+                if (node.multipartType) {
+                    for (let childNode of node.childNodes) {
+                        walk(childNode, level + 1);
+                    }
+                } else {
+                    u.push(node.content);
+                }
+            };
+
+            walk(mp, 0);
+
             let compiled = await mp.serialize();
 
             let destHash = createHash('md5').update(compiled).digest('hex');
@@ -32,7 +49,9 @@ async function run(list) {
                 console.log(fPath);
                 console.log(sourceHash);
                 console.log(destHash);
+                console.log('-------------------\n');
 
+                /*
                 console.log(
                     JSON.stringify(
                         {
@@ -43,9 +62,8 @@ async function run(list) {
                         2
                     )
                 );
-
-                console.log('-------------------\n');
                 throw new Error('No match');
+                */
             }
         } catch (err) {
             console.error('Failed processing %s', fPath);

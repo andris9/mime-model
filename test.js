@@ -2,7 +2,6 @@
 
 const util = require('util');
 const { MimeNode } = require('./lib/mime-model');
-console.log(MimeNode);
 
 const fs = require('fs');
 let sourceEml;
@@ -12,43 +11,45 @@ if (process.argv[2]) {
     //sourceEml = Buffer.from('Subject: Hello\r\n  World\r\n');
 } else {
     sourceEml = Buffer.from('Subject: Hello\r\n  World\r\n  Again\ndef\rghi\r\r\r\n\neeeee\n\n');
-}
 
-sourceEml = Buffer.from(
-    'Content-type: multipart/mixed; boundary=ABC\r\n' +
-        '\r\n' +
-        '--ABC\r\n' +
-        'Content-type: multipart/related; boundary=DEF\r\n' +
-        '\r\n' +
-        '--DEF\r\n' +
-        'Content-type: text/plain; charset=utf-8\r\n' +
-        '\r\n' +
-        'ÕÄÖÜ\r\n' +
-        '--DEF--\r\n' +
-        '--ABC'
-);
-
-sourceEml = Buffer.from(
-    (
+    sourceEml = Buffer.from(
         'Content-type: multipart/mixed; boundary=ABC\r\n' +
-        '\r\n' +
-        '--ABC\r\n' +
-        'Content-type: text/plain; charset=utf-8\r\n' +
-        '\r\n' +
-        'ÕÄÖÜ1\r\n' +
-        '--ABC\r\n' +
-        'Content-type: text/plain; charset=utf-8\r\n' +
-        '\r\n' +
-        'ÕÄÖÜ2\r\n\r\n' +
-        '--ABC--\r\n'
-    ).replace(/\r?\n/g, '\n')
-);
+            '\r\n' +
+            '--ABC\r\n' +
+            'Content-type: multipart/related; boundary=DEF\r\n' +
+            '\r\n' +
+            '--DEF\r\n' +
+            'Content-type: text/plain; charset=utf-8\r\n' +
+            '\r\n' +
+            'ÕÄÖÜ\r\n' +
+            '--DEF--\r\n' +
+            '--ABC'
+    );
+
+    sourceEml = Buffer.from(
+        (
+            'Content-type: multipart/mixed; boundary=ABC\r\n' +
+            '\r\n' +
+            '--ABC\r\n' +
+            'Content-type: text/plain; charset=utf-8\r\n' +
+            '\r\n' +
+            'ÕÄÖÜ1\r\n' +
+            '--ABC\r\n' +
+            'Content-type: text/plain; charset=utf-8\r\n' +
+            '\r\n' +
+            'ÕÄÖÜ2\r\n\r\n' +
+            '--ABC--\r\n'
+        ).replace(/\r?\n/g, '\n')
+    );
+}
 
 async function main() {
     let mp = await MimeNode.from(sourceEml, {
         //lineBr: '\r\n'
         //defaultBr: '\n'
     });
+
+    console.log(util.inspect(mp.contentData, false, 22, true));
 
     let walk = (node, level) => {
         let prefix = ' '.repeat(level * 2);
@@ -78,7 +79,10 @@ async function main() {
     let n1 = MimeNode.create(
         'multipart/mixed',
         {
-            subject: 'Mõnel pool elavad ka kalan kõrbenult 🤔'
+            subject: 'Mõnel pool elavad ka kalan kõrbenult 🤔',
+            from: { name: 'Ändris', address: 'andmekala@hot.ee' },
+            to: 'kukehari@neti.ee, "Kuke Pets" <peeter@kukehari.ee>',
+            date: 'Thu, 03 Nov 2022 14:45:47 +0000'
         },
         {
             lineBr: '\n'
