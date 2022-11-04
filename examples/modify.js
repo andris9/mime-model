@@ -35,8 +35,11 @@ function walkNodes(node) {
                     if (sourceCharset && !/^utf[-_]8$/i.test(sourceCharset)) {
                         // update charset info in MIME headers
                         node.charset = 'utf-8';
-                        // convert content to utf-8
+                        // convert content to unicode string
                         content = iconv.decode(content, sourceCharset);
+                    } else {
+                        // cast buffer to string
+                        content = content.toString();
                     }
 
                     let extraText = node.contentType === 'text/html' ? `<div>${text}</div>` : text;
