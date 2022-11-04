@@ -6,8 +6,12 @@ See [examples/](examples/) folder for usage examples.
 
 ## Usage
 
+```
+$ npm install mime-model
+```
+
 ```js
-const { MimeNode } = require('mime-model);
+const { MimeNode } = require('mime-model');
 ```
 
 ### Parse from EML
