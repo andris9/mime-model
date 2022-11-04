@@ -44,7 +44,7 @@ if (process.argv[2]) {
 }
 
 async function main() {
-    let mp = await MimeNode.from(sourceEml, {
+    let mp = MimeNode.from(sourceEml, {
         //lineBr: '\r\n'
         //defaultBr: '\n'
     });
@@ -70,7 +70,7 @@ async function main() {
 
     console.log('WALKED');
 
-    let output = await mp.serialize();
+    let output = mp.serialize();
 
     process.stdout.write(output);
 
@@ -112,7 +112,7 @@ async function main() {
     n2.appendChild(n3);
     n2.appendChild(n4);
 
-    process.stdout.write(await n1.serialize());
+    process.stdout.write(n1.serialize());
 }
 
 main()

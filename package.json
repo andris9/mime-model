@@ -13,7 +13,8 @@
     },
     "devDependencies": {
         "eslint-config-nodemailer": "1.2.0",
-        "eslint-config-prettier": "8.5.0"
+        "eslint-config-prettier": "8.5.0",
+        "openpgp": "^5.5.0"
     },
     "scripts": {
         "test": "node --test test/"

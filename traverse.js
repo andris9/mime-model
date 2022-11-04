@@ -22,7 +22,7 @@ async function run(list) {
 
             let sourceHash = createHash('md5').update(eml).digest('hex');
 
-            let mp = await MimeNode.from(eml, {});
+            let mp = MimeNode.from(eml, {});
 
             let walk = (node, level) => {
                 let prefix = ' '.repeat(level * 2);
@@ -40,7 +40,7 @@ async function run(list) {
 
             walk(mp, 0);
 
-            let compiled = await mp.serialize();
+            let compiled = mp.serialize();
 
             let destHash = createHash('md5').update(compiled).digest('hex');
             if (sourceHash !== destHash) {
