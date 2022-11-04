@@ -12,10 +12,13 @@ if (!process.argv[2]) {
     process.exit();
 }
 
-const eml = fs.readFileSync(process.argv[2]);
-const privateKeyPem = fs.readFileSync(process.argv[3] || Path.join(__dirname, 'keys', 'private.pem'), 'utf-8');
-
-async function main() {
+/**
+ * Sign an email with OpenPGP
+ * @param {Buffer} eml Email source
+ * @param {String} privateKeyPem PEM formatted pgp key (without a password)
+ * @returns {Buffer} EML formatted signed email
+ */
+async function signEml(eml, privateKeyPem) {
     // Parse EML buffer into a Mime Node
     const rootNode = MimeNode.from(eml, {
         // enforce line break format
@@ -23,11 +26,11 @@ async function main() {
     });
 
     // Extract data that will be signed from the original email
-    const contentTypeHeaders = rootNode.headers.remove('Content-Type');
-    const contentTransferEncodingHeaders = rootNode.headers.remove('Content-Transfer-Encoding');
+    const contentTypeHeaders = rootNode.removeHeaders('Content-Type');
+    const contentTransferEncodingHeaders = rootNode.removeHeaders('Content-Transfer-Encoding');
     const mimeBody = rootNode.removeBody();
 
-    // Create new empty mime node to transfer the content we want to sign to
+    // Create new empty mime node where to transfer the content we want to sign
     const bodyMimeNode = MimeNode.create(null);
 
     bodyMimeNode.setHeaders(contentTypeHeaders);
@@ -61,10 +64,19 @@ async function main() {
     // Add signature node
     rootNode.appendChild(signatureMimeNode);
 
-    process.stdout.write(rootNode.serialize());
+    console.log(rootNode.headers);
+
+    return rootNode.serialize();
 }
 
-main().catch(err => {
-    console.error(err);
-    process.exit(1);
-});
+const eml = fs.readFileSync(process.argv[2]);
+const privateKeyPem = fs.readFileSync(process.argv[3] || Path.join(__dirname, 'keys', 'private.pem'), 'utf-8');
+
+signEml(eml, privateKeyPem)
+    .then(signedEml => {
+        process.stdout.write(signedEml);
+    })
+    .catch(err => {
+        console.error(err);
+        process.exit(1);
+    });

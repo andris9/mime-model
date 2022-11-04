@@ -33,19 +33,25 @@ textNode.content = 'Hello, 👻!\n';
 const htmlNode = MimeNode.create('text/html; charset=utf-8', {
     encoding: 'quoted-printable'
 });
+
+// Set content for the node after node has been initialized
 htmlNode.content = '<p><b>Hello, 👻!</b></p>\n';
 
 const attachmentNode = MimeNode.create('image/png', {
     encoding: 'base64',
-    disposition: 'attachment',
-    filename: '✅.png'
+    // disposition defaults to "attachment" if filename is provided
+    //disposition: 'attachment',
+    filename: '✅.png',
+    contentId: '<tere@vana>',
+
+    // Set content as part of the initialization
+    content: Buffer.from(
+        'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEUAAAD/' +
+            '//+l2Z/dAAAAM0lEQVR4nGP4/5/h/1+G/58ZDrAz3D/McH8yw83NDDeNGe4U' +
+            'g9C9zwz3gVLMDA/A6P9/AFGGFyjOXZtQAAAAAElFTkSuQmCC',
+        'base64'
+    )
 });
-attachmentNode.content = Buffer.from(
-    'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEUAAAD/' +
-        '//+l2Z/dAAAAM0lEQVR4nGP4/5/h/1+G/58ZDrAz3D/McH8yw83NDDeNGe4U' +
-        'g9C9zwz3gVLMDA/A6P9/AFGGFyjOXZtQAAAAAElFTkSuQmCC',
-    'base64'
-);
 
 alternativeNode.appendChild(textNode);
 alternativeNode.appendChild(htmlNode);
