@@ -25,15 +25,14 @@ function walkNodes(node) {
             walkNodes(childNode);
         }
     } else if (node.disposition !== 'attachment') {
-        console.log(node.disposition);
         switch (node.contentType) {
             case 'text/plain':
             case 'text/html':
                 {
                     let content = node.content;
-
                     let sourceCharset = node.charset;
-                    if (sourceCharset && /^utf[-_]8/i.test(sourceCharset)) {
+
+                    if (sourceCharset && !/^utf[-_]8$/i.test(sourceCharset)) {
                         // update charset info in MIME headers
                         node.charset = 'utf-8';
                         // convert content to utf-8
@@ -44,7 +43,7 @@ function walkNodes(node) {
 
                     // The text content might use non-ascii letters, so force encoding to quoted-printable
                     node.encoding = 'quoted-printable';
-                    node.content = Buffer.concat([content, Buffer.from(`\n${extraText}`)]);
+                    node.content = Buffer.concat([Buffer.from(content), Buffer.from(`\n${extraText}`)]);
                 }
                 break;
         }
