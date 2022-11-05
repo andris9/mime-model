@@ -64,8 +64,6 @@ async function signEml(eml, privateKeyPem) {
     // Add signature node
     rootNode.appendChild(signatureMimeNode);
 
-    console.log(rootNode.headers);
-
     return rootNode.serialize();
 }
 

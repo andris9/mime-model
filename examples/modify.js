@@ -1,6 +1,5 @@
 'use strict';
 
-const iconv = require('iconv-lite');
 const fs = require('fs');
 const { MimeNode } = require('../lib/mime-model');
 
@@ -12,7 +11,7 @@ if (!process.argv[2]) {
 }
 
 const eml = fs.readFileSync(process.argv[2]);
-const text = process.argv[3] || '';
+const text = process.argv[3] || 'Signature text';
 
 const rootNode = MimeNode.from(eml, {
     // enforce line break format
@@ -29,24 +28,18 @@ function walkNodes(node) {
             case 'text/plain':
             case 'text/html':
                 {
-                    let content = node.content;
-                    let sourceCharset = node.charset;
+                    // node.content returns a Buffer, contentText returns unicode string
+                    let content = node.contentText;
 
-                    if (sourceCharset && !/^utf[-_]8$/i.test(sourceCharset)) {
-                        // update charset info in MIME headers
-                        node.charset = 'utf-8';
-                        // convert content to unicode string
-                        content = iconv.decode(content, sourceCharset);
-                    } else {
-                        // cast buffer to string
-                        content = content.toString();
-                    }
-
-                    let extraText = node.contentType === 'text/html' ? `<div>${text}</div>` : text;
-
-                    // The text content might use non-ascii letters, so force encoding to quoted-printable
+                    // The text content might use non-ascii letters, so convert output encoding to quoted-printable
                     node.encoding = 'quoted-printable';
-                    node.content = Buffer.concat([Buffer.from(content), Buffer.from(`\n${extraText}`)]);
+
+                    // Convert MIME output to use Windows-1257
+                    node.charset = 'win-1257';
+
+                    // String value is converted to correct charset
+                    // Buffer value is stored as is
+                    node.content = `${content}\n${node.contentType === 'text/html' ? `<div>${text}</div>` : text}`;
                 }
                 break;
         }
