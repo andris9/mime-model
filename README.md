@@ -126,11 +126,10 @@ process.stdout.write(node.serialize());
 Output
 
 ```
-Content-Type: text/plain
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
-Message-ID: <aee375a2-fc7d-4752-9646-ae7a71ac829c@mim>
-Date: Fri, 04 Nov 2022 14:37:44 +0000
+Message-ID: <64300d0d-022d-4ad3-9212-ad84116ef922@mim>
+Date: Sun, 06 Nov 2022 15:51:38 +0000
 MIME-Version: 1.0
 
 Hello world =F0=9F=94=86!
