@@ -181,6 +181,26 @@ Read or set Content-Id value.
 imageNode.contentId = '<unique-id@example.com>';
 ```
 
+### addresses
+
+Read and set address field values. The returned value is a structured object with unicode strings. When setting, you can use structured objects or a full header string without encoding.
+
+-   _node.from_
+-   _node.to_
+-   _node.cc_
+-   _node.bcc_
+-   _node.sender_
+-   _node.replyTo_
+
+**Example**
+
+```
+node.from = 'Juulius 📭 <example.com>';
+console.log(node.from);
+
+[ { address: 'example.com', name: 'Juulius 📭' } ]
+```
+
 ### headers
 
 Read node headers. The value is a list of tuples with header keys and values.
