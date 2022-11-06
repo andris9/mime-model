@@ -29,6 +29,12 @@ const node = MimeNode.create(contentType, {
 });
 ```
 
+See possible content options [below](#node-editing).
+
+In addition to normal content options you can use the following special options:
+
+-   `defaultHeaders` - if `true` then sets headers like `Date`, `Message-ID` and `MIME-Version`
+
 ### Access child nodes
 
 ```
@@ -132,6 +138,8 @@ Hello world =F0=9F=94=86!
 
 ## Node editing
 
+All the following properties can be used as content options when creating new nodes using `MimeNode.create()`.
+
 ### subject
 
 Read or set subject line. Unicode strings are used, so need to encode or decode anything. Value is `null` if subject is not set.
@@ -233,6 +241,15 @@ node.from = 'Juulius 📭 <example.com>';
 console.log(node.from);
 
 [ { address: 'example.com', name: 'Juulius 📭' } ]
+```
+
+### messageId
+
+Read or set Message-Id value.
+
+```js
+console.log(rootNode.messageId);
+// " <28b35c92-852a-4862-b654-72e25f091223@example.com>"
 ```
 
 ### headers
