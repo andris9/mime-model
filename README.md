@@ -64,6 +64,40 @@ const textNode = MimeNode.create('text/plain', {
 node.appendChild(textNode);
 ```
 
+### Check Content-Type
+
+MIME-type of the node or `null` if not set.
+
+```
+node.contentType -> String
+```
+
+**Example**
+
+```js
+if (node.contentType === 'image/png') {
+    console.log('Image attachment');
+}
+```
+
+### Check multipart
+
+Multipart type like _"mixed"_ or _"alternative"_ etc. `null` if this node is not a multipart node.
+
+```
+node.multipart -> String
+```
+
+**Example**
+
+```js
+if (node.multipart) {
+    for (let childNode of node.childNodes) {
+        // ...
+    }
+}
+```
+
 ### Serialize
 
 Convert node to EML buffer
