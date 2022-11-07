@@ -31,13 +31,13 @@ const node = MimeNode.create(contentType, {
 
 See possible content options [below](#node-editing).
 
-In addition to normal content options you can use the following special options:
+In addition to normal content options, you can use the following special options:
 
 -   `defaultHeaders` - if `true` then sets default headers like `Date`, `Message-ID` and `MIME-Version`
 
 ### Serialize
 
-Serialize a mime node to back to an EML file.
+Serialize a mime node back to an EML file.
 
 ```
 node.serialize() -> Buffer
@@ -167,7 +167,7 @@ All the following properties can be used as content options when creating new no
 
 ### subject
 
-Read or set subject line. Unicode strings are used, so need to encode or decode anything. Value is `null` if subject is not set.
+Read or set the subject line. Unicode strings are used by default, so there is no need to encode or decode anything. Value is `null` if the subject is not set.
 
 ```js
 console.log(node.subject); // "Subject line 👀"
@@ -176,7 +176,7 @@ node.subject = 'Another subject ✅';
 
 ### date
 
-Read or set date objects. Value is `null` if date is not set.
+Read or set date objects. Value is `null` if the date is not set.
 
 ```js
 console.log(node.date); // 2022-11-05T19:51:24.992Z (Date object)
@@ -188,7 +188,7 @@ node.date = node.date.getTime() + 1000; // number is coerced to a date object
 Read or set Content-Transfer-Encoding for a node.
 
 ```js
-// change content trasnfer encoding of a node from base64 to quoted-printable
+// change content transfer encoding of a node from base64 to quoted-printable
 if (node.encoding === 'base64') {
     node.encoding = 'quoted-printable';
 }
@@ -196,7 +196,7 @@ if (node.encoding === 'base64') {
 
 ### charset
 
-Read or set character set for a text content node.
+Read or set the character set for a text content node.
 
 ```js
 // enforce UTF-8 for ISO-2022-JP content
@@ -224,7 +224,7 @@ textNode.content = textNode.contentText + ' suffix value';
 
 ### filename
 
-Read or set file name for the node.
+Read or set the file name for the node.
 
 ```js
 imageNode.filename = 'Image ✅.png';
@@ -250,7 +250,7 @@ imageNode.contentId = '<unique-id@example.com>';
 
 ### addresses
 
-Read and set address field values. The returned value is a structured object with unicode strings. When setting, you can use structured objects or a full header string without encoding.
+Read and set address field values. The returned value is a structured object with unicode strings. When setting an address value, you can use structured objects or a full header string without encoding.
 
 -   _node.from_
 -   _node.to_
@@ -261,11 +261,15 @@ Read and set address field values. The returned value is a structured object wit
 
 **Example**
 
-```
-node.from = 'Juulius 📭 <example.com>';
-console.log(node.from);
+```js
+node.from = 'Juulius 📭 <juulius@example.com>';
+node.to = [{ name: 'Mõdu 🍯', address: 'modu@example.com' }];
 
-[ { address: 'example.com', name: 'Juulius 📭' } ]
+console.log(node.from);
+console.log(node.to);
+
+// [ { address: 'juulius@example.com', name: 'Juulius 📭' } ]
+// [ { name: 'Mõdu 🍯', address: 'modu@example.com' } ]
 ```
 
 ### messageId
@@ -337,7 +341,7 @@ bodyMimeNode.setHeaders(contentTypeHeaders);
 
 ### setHeaders()
 
-Applies headers to a node. The input array either includes header entry objects returned by `removeHeaders()` or full header strings.
+Adds headers to a node. The input array either includes header entry objects returned by `removeHeaders()` or full header strings.
 
 ```js
 node.setHeaders(headersArray);
@@ -362,7 +366,7 @@ This method works both for content nodes and multipart nodes.
 
 ### setBody()
 
-Attach body object from one node to another. You can get this object from the `removeBody()` call.
+Attach a body object from one node to another. You can get this object from the `removeBody()` call.
 
 ```
 node.setBody(bodyObj) -> Object
@@ -387,7 +391,7 @@ childNode.setHeaders(contentTypeHeaders);
 childNode.setHeaders(contentTransferEncodingHeaders);
 childNode.setBody(mimeBody);
 
-// force root node into a multipart node and attach the child node to it
+// force the root node into a multipart node and attach the child node to it
 rootNode.resetContent('multipart/mixed');
 rootNode.appendChild(childNode);
 ```
