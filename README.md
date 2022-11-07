@@ -392,7 +392,6 @@ Convert a regular mime node into a multipart node.
 
 ```js
 // remove body and relevant headers from the root node
-const mimeBody = rootNode.removeBody();
 const contentTypeHeaders = rootNode.removeHeaders('Content-Type');
 const contentTransferEncodingHeaders = rootNode.removeHeaders('Content-Transfer-Encoding');
 const mimeBody = rootNode.removeBody();
