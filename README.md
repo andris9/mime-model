@@ -152,6 +152,20 @@ const textNode = MimeNode.create('text/plain', {
 node.appendChild(textNode);
 ```
 
+### Remove a child node
+
+Removes a child node from the parent node and returns the removed node.
+
+```js
+parentNode.removeChild(childNode);
+```
+
+or
+
+```js
+childNode.delete();
+```
+
 ### Check Content-Type
 
 MIME-type of the node or `null` if not set.
