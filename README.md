@@ -2,7 +2,7 @@
 
 Create and parse MIME nodes.
 
-See the [examples fiolder](examples/) for usage examples.
+See the [examples folder](examples/) for usage examples.
 
 ## Usage
 
@@ -33,7 +33,7 @@ See possible content options [below](#node-editing).
 
 In addition to normal content options you can use the following special options:
 
--   `defaultHeaders` - if `true` then sets headers like `Date`, `Message-ID` and `MIME-Version`
+-   `defaultHeaders` - if `true` then sets default headers like `Date`, `Message-ID` and `MIME-Version`
 
 ### Serialize
 
@@ -66,9 +66,9 @@ MIME-Version: 1.0
 Hello world =F0=9F=94=86!
 ```
 
-### Check multipart
+### multipart
 
-The property contains the multipart type for the node, like _"mixed"_ or _"alternative"_, etc. The value is `null` if this node is not a multipart node.
+The `multipart` property contains the multipart type for the node, like _"mixed"_ or _"alternative"_, etc. The value is `null` if this node is not a multipart node.
 
 ```
 node.multipart -> String
@@ -84,13 +84,39 @@ if (node.multipart) {
 }
 ```
 
-### Access child nodes
+### childNodes
+
+The `chldNodes` property contains an array of child nodes for a multipart node.
 
 ```
 node.childNodes -> Array
 ```
 
-Additionally check if there's a value for `node.multipart` as only multipart nodes have child nodes.
+**Example**
+
+Prints out a tree structure of _Content-Type_ values by traversing all child nodes in the MIME tree.
+
+```js
+let walkNodes = (node, level) => {
+    console.log('  '.repeat(level) + node.contentType);
+    if (node.multipart) {
+        for (let childNode of node.childNodes) {
+            walkNodes(childNode, level + 1);
+        }
+    }
+};
+walkNodes(rootNode, 0);
+```
+
+Example output:
+
+```
+multipart/mixed
+  multipart/alternative
+    text/plain
+    text/html
+  image/png
+```
 
 ### Add a child node to a multipart node
 
