@@ -40,8 +40,15 @@ In addition to normal content options, you can use the following special options
 Serialize a mime node back to an EML file.
 
 ```
-node.serialize() -> Buffer
+node.serialize([opts]) -> Buffer
 ```
+
+Where `opts` is an object that limits ouput:
+
+-   **ops.headers** if `true` will only return headers
+-   **ops.body** if `true` will only return body of the node
+
+If both are true, an empty value is returned.
 
 **Example**
 
@@ -270,6 +277,11 @@ console.log(node.to);
 
 // [ { address: 'juulius@example.com', name: 'Juulius 📭' } ]
 // [ { name: 'Mõdu 🍯', address: 'modu@example.com' } ]
+
+process.stdout.write(node.serialize({ headers: true }));
+
+// From: =?UTF-8?Q?Juulius_=F0=9F=93=AD?= <juulius@example.com>
+// To: =?UTF-8?B?TcO1ZHUg8J+Nrw==?= <modu@example.com>
 ```
 
 ### messageId
