@@ -324,6 +324,48 @@ node.setHeaders([`Subject: =?UTF-8?Q?Nodemailer_is_unicode_friendly_=E2=9C=94?= 
 console.log(node.subject); // "Nodemailer is unicode friendly ✔1656663957583"
 ```
 
+### removeBody()
+
+Removes and returns body structure from a node. Useful when you want to body contents from one node to another.
+
+```
+node.removeBody() -> Object
+```
+
+This method works both for content nodes and multipart nodes.
+
+### setBody()
+
+Attach body object from one node to another. You can get this object from the `removeBody()` call.
+
+```
+node.setBody(bodyObj) -> Object
+```
+
+This method works both for content nodes and multipart nodes.
+
+**Example**
+
+Convert a regular mime node into a multipart node.
+
+```js
+// remove body and relevant headers from the root node
+const mimeBody = rootNode.removeBody();
+const contentTypeHeaders = rootNode.removeHeaders('Content-Type');
+const contentTransferEncodingHeaders = rootNode.removeHeaders('Content-Transfer-Encoding');
+const mimeBody = rootNode.removeBody();
+
+// create a new empty node and attach headers and body
+const childNode = MimeNode.create(null);
+childNode.setHeaders(contentTypeHeaders);
+childNode.setHeaders(contentTransferEncodingHeaders);
+childNode.setBody(mimeBody);
+
+// force root node into a multipart node and attach the child node to it
+rootNode.resetContent('multipart/mixed');
+rootNode.appendChild(childNode);
+```
+
 ## License
 
 **MIT**
