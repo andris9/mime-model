@@ -2,7 +2,7 @@
 
 Create and parse MIME nodes.
 
-See [examples/](examples/) folder for usage examples.
+See the [examples fiolder](examples/) for usage examples.
 
 ## Usage
 
@@ -35,6 +35,55 @@ In addition to normal content options you can use the following special options:
 
 -   `defaultHeaders` - if `true` then sets headers like `Date`, `Message-ID` and `MIME-Version`
 
+### Serialize
+
+Serialize a mime node to back to an EML file.
+
+```
+node.serialize() -> Buffer
+```
+
+**Example**
+
+```js
+const node = MimeNode.create('text/plain', {
+    encoding: 'quoted-printable',
+    content: 'Hello world 🔆!',
+    defaultHeaders: true
+});
+process.stdout.write(node.serialize());
+```
+
+Output
+
+```
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Message-ID: <64300d0d-022d-4ad3-9212-ad84116ef922@mim>
+Date: Sun, 06 Nov 2022 15:51:38 +0000
+MIME-Version: 1.0
+
+Hello world =F0=9F=94=86!
+```
+
+### Check multipart
+
+The property contains the multipart type for the node, like _"mixed"_ or _"alternative"_, etc. The value is `null` if this node is not a multipart node.
+
+```
+node.multipart -> String
+```
+
+**Example**
+
+```js
+if (node.multipart) {
+    for (let childNode of node.childNodes) {
+        // ...
+    }
+}
+```
+
 ### Access child nodes
 
 ```
@@ -43,7 +92,7 @@ node.childNodes -> Array
 
 Additionally check if there's a value for `node.multipart` as only multipart nodes have child nodes.
 
-### Add node to multipart node
+### Add a child node to a multipart node
 
 ```js
 node.appendChild(newNode);
@@ -84,55 +133,6 @@ node.contentType -> String
 if (node.contentType === 'image/png') {
     console.log('Image attachment');
 }
-```
-
-### Check multipart
-
-Multipart type like _"mixed"_ or _"alternative"_ etc. `null` if this node is not a multipart node.
-
-```
-node.multipart -> String
-```
-
-**Example**
-
-```js
-if (node.multipart) {
-    for (let childNode of node.childNodes) {
-        // ...
-    }
-}
-```
-
-### Serialize
-
-Convert node to EML buffer
-
-```
-node.serialize();
-```
-
-**Example**
-
-```js
-const node = MimeNode.create('text/plain', {
-    encoding: 'quoted-printable',
-    content: 'Hello world 🔆!',
-    defaultHeaders: true
-});
-process.stdout.write(node.serialize());
-```
-
-Output
-
-```
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Message-ID: <64300d0d-022d-4ad3-9212-ad84116ef922@mim>
-Date: Sun, 06 Nov 2022 15:51:38 +0000
-MIME-Version: 1.0
-
-Hello world =F0=9F=94=86!
 ```
 
 ## Node editing
@@ -253,7 +253,7 @@ console.log(rootNode.messageId);
 
 ### headers
 
-Read node headers. The value is a list of tuples with header keys and values.
+Read node headers. The value is a list of tuples with header keys and values. The ordering is the same as in the serialized header.
 
 ```
 node.headers -> Array
@@ -278,7 +278,7 @@ console.log(node.headers);
 
 ### resetContent()
 
-Clears node content and sets a new content type value. Mostly useful if you want to convert a content node to a multipart node.
+Clears node content and sets a new content type value. Primarily useful if you want to convert a content node to a multipart node. See the [setBody()](#setbody) example for usage.
 
 ```js
 node.resetContent(contentType);
@@ -326,7 +326,7 @@ console.log(node.subject); // "Nodemailer is unicode friendly ✔1656663957583"
 
 ### removeBody()
 
-Removes and returns body structure from a node. Useful when you want to body contents from one node to another.
+Removes and returns body structure from a node. Useful when you want to move body contents from one node to another.
 
 ```
 node.removeBody() -> Object
