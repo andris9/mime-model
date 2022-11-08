@@ -1,0 +1,84 @@
+Return-path: <bounce+956c66.4dca9-andris=reinman.eu@out.unemaskid.ee>
+Original-recipient: rfc822;andris@reinman.eu
+Received: from mr28p00im-smtpin035.me.com by p53-mailgateway-smtp-7bc7f569c4-rvvjm (mailgateway 2222B262)
+	with SMTP id 7cc6452a-6f21-44ad-ae8c-da94ebc3fd00 
+	for <andris@reinman.eu>; Wed, 31 Aug 2022 01:30:19 GMT
+X-Apple-MoveToFolder: INBOX 
+X-Apple-Action: MOVE_TO_FOLDER/INBOX
+X-Apple-UUID: 7cc6452a-6f21-44ad-ae8c-da94ebc3fd00
+Received: from m32-11.eu.mailgun.net (m32-11.eu.mailgun.net [141.193.32.11])
+	by mr28p00im-smtpin035.me.com (Postfix) with ESMTPS id 96D43444DEB
+	for <andris@reinman.eu>; Wed, 31 Aug 2022 01:30:16 +0000 (UTC)
+X-ICL-SCORE: 3.3320330300
+X-ICL-INFO: GAtbVUseBVFHSVVESAMGUldZCh4MXUMRSFsIVVhDQ19XFwkZHRIWBxFERBUXRVgBEFJfQk5TAFRb
+ TQIUGQkbAxsdFB4LDUQHHBcLFhYeUxc1FhMDVkVYBxgYFRwRVBgHEFtGERwNFBcbHAsWC1tfBlsc
+ A1VYQ18SSFtXQ0keB1tGV1VFVgEHQFURAxsXDRQPRktLRkkeUxdbFAceFFdDDFsXAwNaEEYWB0RE
+ GksCG1NEVwMCVl1XCxkeExlWXlMWV1kCE0USWRcBVxMZHV1XER4QAlkdVRRCGBACSloMBFJHS1ZP
+ SwEGU0ZJV0dWCAEBRBtTFE4AAwBMGAdFT3BZFwFXExkdXVcRHhACWR1VCEBVCwVKWlFYBgcQFTcK
+ VV8MGBgIWR1FFA==
+Authentication-Results: bimi.icloud.com; bimi=skipped reason="insufficient dmarc"
+Authentication-Results: dmarc.icloud.com; dmarc=none header.from=unemaskid.ee
+X-DMARC-Info: pass=none; dmarc-policy=(nopolicy); s=u0; d=u0; pdomain=unemaskid.ee
+X-DMARC-Policy: none
+Authentication-Results: dkim-verifier.icloud.com;
+	dkim=pass (2048-bit key) header.d=out.unemaskid.ee header.i=@out.unemaskid.ee header.b=YbuLCTYU
+Authentication-Results: spf.icloud.com; spf=pass (spf.icloud.com: domain of bounce+956c66.4dca9-andris=reinman.eu@out.unemaskid.ee designates 141.193.32.11 as permitted sender) smtp.mailfrom="bounce+956c66.4dca9-andris=reinman.eu@out.unemaskid.ee"
+Received-SPF: pass (spf.icloud.com: domain of bounce+956c66.4dca9-andris=reinman.eu@out.unemaskid.ee designates 141.193.32.11 as permitted sender) receiver=spf.icloud.com; client-ip=141.193.32.11; helo=m32-11.eu.mailgun.net; envelope-from="bounce+956c66.4dca9-andris=reinman.eu@out.unemaskid.ee"
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=out.unemaskid.ee; q=dns/txt;
+ s=mta; t=1661909414; x=1661995814; h=Content-Type:
+ Content-Transfer-Encoding: Message-Id: To: To: From: From: Subject:
+ Subject: Mime-Version: Date: Sender: Sender;
+ bh=GQTqA81Zd0mmFFyKxt2meIEn30A4IhteLt6wGYsgL5Y=; b=YbuLCTYURuqGKDBaXURllV5q5EtnCf6z0pMBsdcUwicVDZe8oDb8KIodup/PXibcPjtjdPZO
+ CwlA/ajBS94AjwYgB5V31ctvxNiCeNtXO0uUSqCKOlYG/iQLtd13H9ZKHPQNB90zmEiKlvwS
+ Ft8fmIhOMnLXScrIvgTA6l+2Gpn2UZlLitK58YKeuXkdXklDJcqLxgBnj/syIULDYWhaK+iB
+ V43LyGYJI9yc+F4XE9NmiXqt4cd+QEPlsIRPBDmTSqN006137Fs2oy0Zt0DwOR8SKbMBtkuJ
+ ypMmMgnCEWxXecGxMpneLBXbQLyFROpUUh+ZFxR3BGuw0/yoAQb3uw==
+X-Mailgun-Sending-Ip: 141.193.32.11
+X-Mailgun-Sid: WyJjNzFmOCIsImFuZHJpc0ByZWlubWFuLmV1IiwiNGRjYTkiXQ==
+Received: from <unknown> (<unknown> []) by
+ api-n04.prod.eu-central-1.postgun.com with HTTP id
+ 630eb9a29fea0a1a71ea4eb1; Wed, 31 Aug 2022 01:30:10 GMT
+Sender: info=unemaskid.ee@out.unemaskid.ee
+Date: Wed, 31 Aug 2022 01:30:10 +0000
+Mime-Version: 1.0
+Subject: [Unemaskid] Sinu veebileht on uuendatud WordPress'i versioonile 6.0.2
+From: Unemaskid <info@unemaskid.ee>
+To: andris@reinman.eu
+X-Mailgun-Track-Clicks: htmlonly
+X-Mailgun-Track-Opens: true
+Message-Id: <20220831013010.87c1b5c605b9aa27@out.unemaskid.ee>
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+X-MANTSH: 1TEIXR1gYEloaGkNHB0tNT0ReQ0QZHBoTEQpMQxcbGgQbGxgEEhwEHx8QGx4aHxo
+ RCkxZFwcYHhEKWUQXbHxCW20TAVxfHVMRCllNF21YT1MRCllJFwcZGnEbBgccGncGBxsfBhoGG
+ gYYGwYacRoQGncGGgYaBhoGGgYaBhpxGhAadwYaEQpZXhdsbHkRCkNOF0dye1lPE0VQXwdESxN
+ DWGRNbFgZZGNtW10TW3lGbhJBEQpYXBcZBBoEHhMHHRhJHx8dSRkFGx0EGxsbBBsfHwQbHxwQG
+ x4aHxoRCl5ZF0t4bB9vEQpNXBceGBEKTFoXaG1Nb2sRCkNaFxseGwQbExkEGRgEGxsRCkJeFxs
+ RCkJcFxsRCl5OFxsRCkJLF2hTZEZQGnNHZ2wbEQpCSRdoU2RGUBpzR2dsGxEKQkUXYG1+fWdkc
+ wFJGkYRCkJOF2hTZEZQGnNHZ2wbEQpCTBdtGH5ZTEAfT39JQREKQmwXemRuaHtjBWgfZWERCkJ
+ AF2JiaUYaG0gcY1BMEQpCWBdpZ21fEwF6TEB9XxEKTV4XBxsRClpYFx4RCnBoF2VLT3JTT19cH
+ kdpEAcZGhEKcGgXZRpvZhpSSAFoWh0QBxkaEQpwaBdhYnsSWEFvYmRFGRAHGRoRCnB9F2lCaVx
+ 5QVhjEnxfEAcZGhEKcH0XYGx4RQFTTl1BaXsQBxkaEQpwfRdsG0NtQnBPTFB7ZhAHGBsRCnB9F
+ 2J7YUd8fFt/e2FYEAcZGhEKcH8XaUJpXHlBWGMSfF8QBxkaEQpwXxdpZFhLZH9JYUVHchAHGRo
+ RCnB/F2t/fWhNW1ISR2R8EAcbHBEKcF8XbGJnfVsabH4ZbxIQBxgbEQpwXxdmQGdPQX8cSAFEY
+ xAHGRoRCnBsF25GQltfGEllQngbEAcZGhEKbX4XBxsRClhNF0sR
+X-CLX-Shades: Grey
+X-Proofpoint-ORIG-GUID: mXQse9ozu-na9irNgFr3NIGqw9qSlD8k
+X-Proofpoint-GUID: mXQse9ozu-na9irNgFr3NIGqw9qSlD8k
+
+Hei-hei! Sinu veebileht https://unemaskid.ee on automaatselt uuendatud Word=
+Press'i versioonile 6.0.2.
+
+Rohkem ei ole vaja midagi teha. Rohkem infot versiooni 6.0.2 kohta leiad le=
+helt:
+https://unemaskid.ee/wp-admin/about.php
+
+Kui sul tekib probleeme ja vajad tehnilist tuge, siis vabatahtlikud WordPre=
+ss.org foorumites v=C3=B5ivad osata sind aidata.
+https://wordpress.org/support/forums/
+
+Sul on ka m=C3=B5ned pluginad ja teemad, mis vajaksid uuendust. Uuenda neid=
+ kohe:
+https://unemaskid.ee/wp-admin/
+
+WordPressi meeskond
