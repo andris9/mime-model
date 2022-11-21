@@ -4,6 +4,10 @@ Create and parse MIME nodes.
 
 See the [examples folder](examples/) for usage examples.
 
+---
+
+This project is supported by [Opensense](https://www.opensense.com) - The beautiful email signature management company for Office 365 and Google Workspace.
+
 ## Usage
 
 ```
