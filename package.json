@@ -1,6 +1,6 @@
 {
     "name": "mime-model",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "Parse and compile mime nodes",
     "main": "lib/mime-model.js",
     "dependencies": {
