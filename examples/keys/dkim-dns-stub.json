@@ -1,0 +1,10 @@
+{
+    "test._domainkey.example.com": {
+        "TXT": [
+            [
+                "v=DKIM1;t=s;p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDwmrdKPTUGiEtJ2FMPdEowIvSclIi6qIihVVcYmT1t3Meqm273DrEgIftyn6C05CEiTvAX3dmjYZvRikc8k0JVZa7M",
+                "0MENkLEY3auOH0TwFTDJrTlVRXCTOrL+2Pa0Zk8oS2krwafOSQb7LqfqE/1ezpC5APWPN/wUD20PWr4xEwIDAQAB"
+            ]
+        ]
+    }
+}

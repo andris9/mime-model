@@ -16,6 +16,7 @@
     "devDependencies": {
         "eslint-config-nodemailer": "1.2.0",
         "eslint-config-prettier": "8.5.0",
+        "mailauth": "4.0.2",
         "openpgp": "5.5.0"
     },
     "scripts": {
