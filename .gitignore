@@ -4,3 +4,5 @@ node_modules
 
 traverse.js
 test.js
+
+examples/devel-*
