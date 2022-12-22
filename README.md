@@ -336,6 +336,29 @@ console.log(node.headers);
 ]
 ```
 
+### Get specific header value
+
+Returns a list of parsed and encoded values for a header key. Each header key has a specific format.
+
+```
+node.getHeader(key) -> Array
+```
+
+> The response is always an array as any header key can be defined multiple times. If you only need the oldest/bottom value, use the last entry from the array.
+
+**Example**
+
+```
+Content-Disposition: attachment;
+ filename*0*=utf-8''nyan%20cat%20%E2%9C%94.gif
+```
+
+```js
+let headerValueArray = node.getHeader('content-disposition');
+console.log(headerValueArray[0].params.filename);
+// "nyan cat ✔.gif"
+```
+
 ### resetContent()
 
 Clears node content and sets a new content type value. Primarily useful if you want to convert a content node to a multipart node. See the [setBody()](#setbody) example for usage.
