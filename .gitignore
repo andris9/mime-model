@@ -1,4 +1,3 @@
-package-lock.json
 node_modules
 .DS_Store
 
@@ -6,3 +5,4 @@ traverse.js
 test.js
 
 examples/devel-*
+.npmrc
